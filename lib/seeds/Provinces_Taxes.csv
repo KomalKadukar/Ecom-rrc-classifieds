@@ -1,0 +1,14 @@
+﻿first,name,code,rate_type,province_rate,canada_rate
+1,Alberta,AB,GST,0,0.05
+2,British Columbia,BC,GST+PST,0.07,0.05
+3,Manitoba,MB,GST+PST,0.08,0.05
+4,New Brunswick,NB,HST,0.1,0.05
+5,Newfoundland and Labrador,NL,HST,0.1,0.05
+6,Northwest Territories,NT,GST,0,0.05
+7,Nova Scotia,NS,HST,0.1,0.05
+8,Nunavut,NU,GST,0,0.05
+9,Ontario,ON,HST,0.08,0.05
+10,Prince Edward Island,PE,HST,0.1,0.05
+11,Quebec,QC,GST + QST,0.09975,0.05
+12,Saskatchewan,SK,GST + PST,0.06,0.05
+13,Yukon,YT,GST,0,0.05
