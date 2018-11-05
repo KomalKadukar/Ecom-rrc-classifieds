@@ -1,2 +1,5 @@
-<h1>Classified#show</h1>
-<p>Find me in app/views/classified/show.html.erb</p>
+<%= render partial: 'classified',
+           object: @classified,
+           locals: {show_link: false} %>
+
+<%= link_to 'Home', root_path %>
