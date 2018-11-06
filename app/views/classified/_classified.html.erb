@@ -1,4 +1,4 @@
-<div class="classified">
+<div class="classified container">
   <h2>
     <% if show_link %>
      <%= link_to classified.item, classified %>
@@ -10,7 +10,7 @@
     <b>Price: </b> <%= classified.price %>
   </p>
   <p>
-    <b>Category: </b> <%= classified.category.name %>
+    <b>Category: </b> <%= link_to classified.category.name, classified.category %>
   </p>
   <p>
     <b>Description: </b> <%= classified.description %>
