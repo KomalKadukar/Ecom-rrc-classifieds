@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :classified, only: [:index, :show]
   resources :pages, only: [:show]
 
-  get ':permalink', to: 'pages#permalink'
+  get ':permalink', to: 'pages#permalink', as: 'permalink'
 
   root to: 'classified#index'
 end
