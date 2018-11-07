@@ -4,6 +4,10 @@ class Classified < ApplicationRecord
 
   has_many :program_classifieds
   has_many :programs, through: :program_classifieds
+  accepts_nested_attributes_for :program_classifieds, allow_destroy: true
+
+  has_many :order_classifieds
+  has_many :orders, through: :order_classifieds
 
   validates :item, :description, :category, :student, presence: true
   validates :admin_ad, :sold, inclusion: { in: [true, false] }
