@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ClassifiedController < ApplicationController
   def index
     @classifieds = Classified.all
