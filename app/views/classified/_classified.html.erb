@@ -6,6 +6,11 @@
      <%= classified.item %>
     <% end %>
   </h2>
+  <% if classified.image.present? %>
+    <p>
+      <%= image_tag classified.image.url %>
+    </p>
+  <% end %>
   <p>
     <b>Price: </b> <%= classified.price %>
   </p>
