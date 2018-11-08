@@ -1,5 +1,5 @@
 ActiveAdmin.register Classified do
-  permit_params :item, :price, :description, :category_id, :student_id, :admin_ad, :sold, program_classifieds_attributes: [:id, :program_id, :classified_id, :_destroy]
+  permit_params :item, :price, :description, :category_id, :student_id, :admin_ad, :sold, :image, program_classifieds_attributes: [:id, :program_id, :classified_id, :_destroy]
 
   index do
     selectable_column
@@ -10,6 +10,7 @@ ActiveAdmin.register Classified do
     column :student_id
     column :admin_ad
     column :sold
+    column :image
 
     column :programs do |classified|
       classified.programs.map { |prog| prog.name }.join(", ").html_safe
@@ -27,6 +28,7 @@ ActiveAdmin.register Classified do
       row :student_id
       row :admin_ad
       row :sold
+      row :image
 
       row :programs do |classified|
         classifed.programs.map { |prog| prog.name }.join(", ").html_safe
@@ -45,6 +47,7 @@ ActiveAdmin.register Classified do
       f.input :student_id
       f.input :admin_ad
       f.input :sold
+      f.input :image
 
       f.has_many :program_classifieds, allow_destroy: true do |n_f|
         n_f.input :program
