@@ -14,4 +14,6 @@ class Classified < ApplicationRecord
   validates :item, :description, :category, :student, presence: true
   validates :admin_ad, :sold, inclusion: { in: [true, false] }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+  mount_uploader :image, ImageUploader
 end
