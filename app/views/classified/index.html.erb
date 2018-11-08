@@ -1,3 +1,17 @@
-<%= render partial: 'classified', #/views/classified/_classified.html.erb
+<div class="shadow-lg p-3 mb-5 bg-light rounded">
+  <h3>Classifieds</h3>
+</div>
+
+<div class="col align-self-start">
+  <%= paginate @classifieds, theme: 'twitter-bootstrap-4' %>
+</div>
+
+<div class="container">
+  <%= render partial: 'classified', #/views/classified/_classified.html.erb
            collection: @classifieds,
            locals: {show_link: true} %>
+</div>
+
+<div class="col align-self-start">
+  <%= paginate @classifieds, theme: 'twitter-bootstrap-4' %>
+</div>

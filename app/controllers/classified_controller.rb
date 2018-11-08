@@ -2,7 +2,7 @@
 
 class ClassifiedController < ApplicationController
   def index
-    @classifieds = Classified.all
+    @classifieds = Classified.order(updated_at: :desc).page(params[:page]).per(4)
   end
 
   def show
