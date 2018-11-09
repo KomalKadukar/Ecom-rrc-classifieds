@@ -1,13 +1,23 @@
 ActiveAdmin.register Classified do
-  permit_params :item, :price, :description, :category_id, :student_id, :admin_ad, :sold, :image, program_classifieds_attributes: [:id, :program_id, :classified_id, :_destroy]
+  permit_params :item, :price, :description,
+                :category_id, :student_id,
+                :admin_ad, :sold, :image,
+                program_classifieds_attributes: [:id, :program_id, :classified_id, :_destroy]
 
   index do
     selectable_column
     column :item
     column :price
     column :description
-    column :category_id
-    column :student_id
+
+    column :category do |classified|
+      classified.category.name.html_safe
+    end
+
+    column :student do |classified|
+      classified.student.name.html_safe
+    end
+
     column :admin_ad
     column :sold
     column :image
@@ -19,19 +29,26 @@ ActiveAdmin.register Classified do
 
   end
 
-  show do |classifed|
+  show do |classified|
     attributes_table do
       row :item
       row :price
       row :description
-      row :category_id
-      row :student_id
+
+      row :categories do |classified|
+        classified.category.name.html_safe
+      end
+
+      row :student do |classified|
+        classified.student.name.html_safe
+      end
+
       row :admin_ad
       row :sold
       row :image
 
       row :programs do |classified|
-        classifed.programs.map { |prog| prog.name }.join(", ").html_safe
+        classified.programs.map { |prog| prog.name }.join(", ").html_safe
       end
     end
   end
@@ -43,8 +60,10 @@ ActiveAdmin.register Classified do
       f.input :item
       f.input :price
       f.input :description
-      f.input :category_id
-      f.input :student_id
+
+      f.input :category
+      f.input :student
+
       f.input :admin_ad
       f.input :sold
       f.input :image
