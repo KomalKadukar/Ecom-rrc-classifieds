@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'program/index'
+  get 'program/show'
   get 'category/index'
   get 'category/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
