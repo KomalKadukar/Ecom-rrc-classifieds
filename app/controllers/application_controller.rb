@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-
   private
 
   def programs
@@ -9,5 +8,4 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :programs
-
 end
