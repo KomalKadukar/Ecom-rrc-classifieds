@@ -1,2 +1,16 @@
-<h1>Program#show</h1>
-<p>Find me in app/views/program/show.html.erb</p>
+<div class="shadow-lg p-3 mb-5 bg-light rounded">
+  <h3 class="text-info font-weight-bold"> <%= @program.name %></h3>
+</div>
+
+<% @program.classifieds.each do |classified| %>
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading"><%= link_to classified.item, classified %></h4>
+    <hr>
+    <% if classified.image.present? %>
+      <p>
+        <%= image_tag classified.image.url %>
+      </p>
+    <% end %>
+    <p class="text-justify"><%= classified.price %></p>
+  </div>
+<% end %>
