@@ -18,6 +18,14 @@
     <b>Category: </b> <%= link_to classified.category.name, classified.category %>
   </p>
   <p>
+    <b>Associated Programs: </b>
+  </p>
+  <p>
+    <% classified.programs.each do |program| %>
+      <%= link_to program.name, program, class: "btn btn-outline-primary"  %>
+    <% end %>
+  </p>
+  <p>
     <b>Description: </b> <%= classified.description %>
   </p>
 </div>
