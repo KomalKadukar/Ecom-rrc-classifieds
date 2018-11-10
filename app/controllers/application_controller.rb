@@ -7,5 +7,10 @@ class ApplicationController < ActionController::Base
     @programs = Program.all
   end
 
+  def categories
+    @categories = Category.all
+  end
+
   helper_method :programs
+  helper_method :categories
 end
