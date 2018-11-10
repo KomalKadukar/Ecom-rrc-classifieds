@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :classified, only: [:index, :show]
+  resources :classified, only: [:index, :show] do
+    collection do
+      get 'results'
+    end
+  end
+
   resources :category, only: [:index, :show], as: 'categories'
   resources :program, only: [:index, :show], as: 'programs'
   resources :pages, only: [:show]
