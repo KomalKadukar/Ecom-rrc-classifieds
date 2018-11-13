@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :students
   # get 'program/index'
   # get 'program/show'
   # get 'category/index'
