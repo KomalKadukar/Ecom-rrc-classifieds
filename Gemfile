@@ -49,6 +49,9 @@ gem 'bootstrap', '~> 4.1.3'
 # Jquery gem required for bootstrap
 gem 'jquery-rails'
 
+# AWS gem for active storage
+gem 'aws-sdk', '~> 3'
+
 # gem for file upload
 gem 'carrierwave'
 
