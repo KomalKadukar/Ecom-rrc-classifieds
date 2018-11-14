@@ -20,13 +20,17 @@ ActiveAdmin.register Classified do
 
     column :admin_ad
     column :sold
-    column :image
+
+    column :image  do |classified|
+      if classified.image.attached?
+        image_tag classified.image.variant(resize: "50x50")
+      end
+    end
 
     column :programs do |classified|
       classified.programs.map { |prog| prog.name }.join(", ").html_safe
     end
     actions
-
   end
 
   show do |classified|
@@ -45,7 +49,11 @@ ActiveAdmin.register Classified do
 
       row :admin_ad
       row :sold
-      row :image
+      row :image do |classified|
+        if classified.image.attached?
+          image_tag classified.image.variant(resize: "100x100")
+        end
+      end
 
       row :programs do |classified|
         classified.programs.map { |prog| prog.name }.join(", ").html_safe
@@ -66,7 +74,14 @@ ActiveAdmin.register Classified do
 
       f.input :admin_ad
       f.input :sold
-      f.input :image
+
+      f.inputs "Attachment", :multipart => true do
+        f.input :image, :as => :file,
+                :hint =>  f.object.image.attached? \
+                            ? image_tag(f.object.image.variant(resize: "150x150"))
+                            : content_tag(:span, "No image attached yet")
+        f.input :image_change, :as => :hidden
+      end
 
       f.has_many :program_classifieds, allow_destroy: true do |n_f|
         n_f.input :program
