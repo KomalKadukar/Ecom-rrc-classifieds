@@ -22,6 +22,5 @@ class ClassifiedController < ApplicationController
         .where('item LIKE :search OR description LIKE :search', search: key)
     end
 
-
   end
 end
