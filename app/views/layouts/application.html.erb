@@ -19,16 +19,6 @@
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
 
-      <% if student_signed_in? %>
-        <li>
-        <%= link_to('Logout', destroy_student_session_path, method: :delete) %>
-        </li>
-      <% else %>
-        <li>
-        <%= link_to('Login', new_student_session_path)  %>
-        </li>
-      <% end %>
-
       <%= yield %>
     </div>
   </body>

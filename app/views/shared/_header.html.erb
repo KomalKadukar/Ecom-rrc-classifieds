@@ -29,18 +29,39 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <%= form_tag(results_classified_index_path, method: "get", class: "form-inline navbar-form navbar-left") do %>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" aria-label="Search">
+          <select class="form-control mr-sm-2" name="category">
+            <option value="all" selected>All Categories</option>
+            <% categories.each do |category| %>
+              <option value="<%= category.name %>"><%= category.name %></option>
+            <% end %>
+          </select>
+          <%= submit_tag("Search", class: "btn btn-outline-success") %>
+        <% end %>
+      </li>
+
     </ul>
 
-    <%= form_tag(results_classified_index_path, method: "get", class: "form-inline my-2 my-lg-0") do %>
+    <% if student_signed_in? %>
+        <%= link_to('Logout', destroy_student_session_path, method: :delete, class: "btn btn-info") %>
+      <% else %>
+        <div class="btn-group dropleft">
+          <button type="button" class="btn btn-info">Login</button>
+          <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to('Sign In', new_student_session_path, class: "dropdown-item text-center font-weight-bold text-info")  %>
+            <div class="dropdown-divider"></div>
+              <div class="bottom text-center">
+                New here ? <%= link_to('Sign Up', new_student_registration_path, class: "dropdown-item font-weight-bold text-info")  %>
+              </div>
+          </div>
+        </div>
+      <% end %>
 
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" aria-label="Search">
-        <select class="form-control mr-sm-2" name="category">
-          <option value="all" selected>All Categories</option>
-          <% categories.each do |category| %>
-            <option value="<%= category.name %>"><%= category.name %></option>
-          <% end %>
-        </select>
-        <%= submit_tag("Search", class: "btn btn-outline-success my-2 my-sm-0") %>
-    <% end %>
+
   </div>
 </nav>
