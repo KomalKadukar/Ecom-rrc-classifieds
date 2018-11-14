@@ -11,7 +11,8 @@ class ClassifiedController < ApplicationController
 
   def results
     key = "%#{params[:query]}%"
-    selected_category = "#{params[:category]}"
+    # selected_category = "#{params[:category]}".to_s
+    selected_category = params[:category].to_s
 
     if selected_category == 'all'
       @classified_results =
@@ -19,8 +20,7 @@ class ClassifiedController < ApplicationController
     else
       @classified_results =
         Classified.joins(:category).where('name = ?', selected_category)
-        .where('item LIKE :search OR description LIKE :search', search: key)
+                  .where('item LIKE :search OR description LIKE :search', search: key)
     end
-
   end
 end
