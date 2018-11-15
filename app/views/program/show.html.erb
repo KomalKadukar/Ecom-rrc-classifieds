@@ -6,9 +6,9 @@
   <div class="alert alert-info" role="alert">
     <h4 class="alert-heading"><%= link_to classified.item, classified %></h4>
     <hr>
-    <% if classified.image.present? %>
+    <% if classified.image.attached? %>
       <p>
-        <%= image_tag classified.image.url %>
+        <%= image_tag classified.image %>
       </p>
     <% end %>
     <p class="text-justify"><%= classified.price %></p>

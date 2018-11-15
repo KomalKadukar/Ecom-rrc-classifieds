@@ -9,14 +9,14 @@
       <li class="nav-item active">
         <%= link_to 'Home', root_path, class: "nav-link" %><span class="sr-only">(current)</span>
       </li>
-      <li class="nav-item">
-        <%= link_to 'About Us', permalink_path(permalink: 'about'), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Contact Us', permalink_path(permalink: 'contact'), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Categories', categories_path, class: "nav-link" %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          About RRC
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to 'About Us', permalink_path(permalink: 'about'), class: "dropdown-item" %>
+          <%= link_to 'Contact Us', permalink_path(permalink: 'contact'), class: "dropdown-item" %>
+        </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,6 +27,16 @@
             <%= link_to program.name, program, class: "dropdown-item"  %>
           <% end %>
         </div>
+      </li>
+
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop By</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown2">
+              <li><%= link_to 'Categories', categories_path, class: "dropdown-item" %></li>
+              <div class="dropdown-divider"></div>
+              <li class="dropdown-item" href="#"><a>Newly Added</a></li>
+              <li class="dropdown-item" href="#"><a>Recently Updated</a></li>
+          </ul>
       </li>
 
       <li class="nav-item">
@@ -49,7 +59,7 @@
       <% else %>
         <div class="btn-group dropleft">
           <button type="button" class="btn btn-info">Login</button>
-          <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-info nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="sr-only">Toggle Dropdown</span>
           </button>
           <div class="dropdown-menu">
