@@ -8,15 +8,15 @@
       <div class="card-body">
       <div class="row">
         <aside class="col-sm-3">
-          <div class="img-wrap">
-            <% if classified.image.attached? %>
+          <% if classified.image.attached? %>
+            <div class="img-wrap">
               <div class="col-xs-6 col-md-3">
                 <%= image_tag classified.image.variant(resize: "180x180"), alt: classified.item %>
               </div>
-            <% else %>
-              <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
-            <% end %>
-          </div>
+            </div>
+          <% else %>
+            <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+          <% end %>
         </aside> <!-- col.// -->
         <article class="col-sm-6">
 
