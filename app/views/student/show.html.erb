@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="shadow-lg p-3 mb-5 bg-light rounded">
+    <h3><span class="text-info font-weight-bold"> <%= @student.name %></span></h3>
+  </div>
+
+  <% @student.classifieds.each do |classified| %>
+    <article class="card card-product">
+      <div class="card-body">
+      <div class="row">
+        <aside class="col-sm-3">
+          <div class="img-wrap">
+            <% if classified.image.attached? %>
+              <div class="col-xs-6 col-md-3">
+                <%= image_tag classified.image.variant(resize: "180x180"), alt: classified.item %>
+              </div>
+            <% else %>
+              <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+            <% end %>
+          </div>
+        </aside> <!-- col.// -->
+        <article class="col-sm-6">
+
+            <h4 class="title"> <%= link_to classified.item, classified %> </h4>
+
+            <p> <%= classified.description %> </p>
+            <dl class="dlist-align">
+              <dt>Category</dt>
+              <dd><%= link_to classified.category.name, classified.category %></dd>
+            </dl>  <!-- item-property-hor .// -->
+            <dl class="dlist-align">
+              <dt>Associated Programs</dt>
+              <% classified.programs.each do |program| %>
+                <dd><%= link_to program.name, program  %></dd>
+              <% end %>
+            </dl>  <!-- item-property-hor .// -->
+
+        </article> <!-- col.// -->
+        <aside class="col-sm-3 border-left">
+          <div class="action-wrap">
+            <div class="price-wrap h4">
+              <span class="price"> <%= number_to_currency(classified.price) %>  </span>
+              <%# <del class="price-old"> $98</del> %>
+            </div> <!-- info-price-detail // -->
+            <%# <p class="text-success">Free shipping</p> %>
+            <br>
+            <p>
+              <a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+              <%= link_to "Details", classified, class:"btn btn-secondary" %>
+            </p>
+            <%# <a href="#"><i class="fa fa-heart"></i> Add to wishlist</a> %>
+          </div> <!-- action-wrap.// -->
+        </aside> <!-- col.// -->
+      </div> <!-- row.// -->
+      </div> <!-- card-body .// -->
+    </article> <!-- product-list.// -->
+  <% end %>
+
+</div>
