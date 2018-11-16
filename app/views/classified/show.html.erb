@@ -1,45 +1,40 @@
 
-<div class="card">
+<div class="card mt-5">
 	<div class="row no-gutters">
 		<aside class="col-sm-5 border-right">
-<article class="gallery-wrap">
-<div class="img-big-wrap">
-  <div>
-    <% if @classified.image.attached? %>
-      <%= image_tag @classified.image.variant(resize: "300x300"), alt: @classified.item %>
-    <% else %>
-      <img class="card-img-top" src="" alt="Image Not Available">
-    <% end %>
-  </div>
-</div> <!-- slider-product.// -->
-
-</article> <!-- gallery-wrap .end// -->
+      <article class="gallery-wrap">
+        <div class="text-center mt-5">
+          <% if @classified.image.attached? %>
+              <%= image_tag @classified.image.variant(resize: "300x300"), alt: @classified.item %>
+            <% else %>
+              <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+            <% end %>
+        </div> <!-- slider-product.// -->
+      </article> <!-- gallery-wrap .end// -->
 		</aside>
 		<aside class="col-sm-7">
-<article class="p-5">
-	<h3 class="title mb-3"> <%= @classified.item %> </h3>
-
-<div class="mb-3">
-	<var class="price h3 text-warning">
-		<%= number_to_currency(@classified.price) %>
-	</var>
-</div> <!-- price-detail-wrap .// -->
-<dl>
-  <dt>Description</dt>
-  <dd><p><%= @classified.description %></p></dd>
-</dl>
-<dl class="row">
-  <dt class="col-sm-3">Category</dt>
-  <dd class="col-sm-9"><%= link_to @classified.category.name, @classified.category %></dd>
-</dl>
-  <p class="font-weight-bold">Associated Programs</p>
-   <% @classified.programs.each do |program| %>
-     <p class="btn  btn-outline-primary"><%= link_to program.name, program  %></p>
-    <% end %>
-
-<hr>
-	<a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
-</article> <!-- card-body.// -->
+      <article class="p-5">
+        <h3 class="title mb-3"> <%= @classified.item %> </h3>
+        <div class="mb-3">
+          <var class="price h3 text-warning">
+            <%= number_to_currency(@classified.price) %>
+          </var>
+        </div> <!-- price-detail-wrap .// -->
+        <dl>
+          <dt>Description</dt>
+          <dd><p><%= @classified.description %></p></dd>
+        </dl>
+        <dl class="row">
+          <dt class="col-sm-3">Category</dt>
+          <dd class="col-sm-9"><%= link_to @classified.category.name, @classified.category %></dd>
+        </dl>
+        <p class="font-weight-bold">Associated Programs</p>
+        <% @classified.programs.each do |program| %>
+          <p class="btn  btn-outline-primary"><%= link_to program.name, program  %></p>
+        <% end %>
+        <hr>
+        <a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+      </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
 	</div> <!-- row.// -->
 </div> <!-- card.// -->
