@@ -34,8 +34,8 @@
           <ul class="dropdown-menu" aria-labelledby="dropdown2">
               <li><%= link_to 'Categories', categories_path, class: "dropdown-item" %></li>
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><a href="#">Newly Added</a></li>
-              <li class="dropdown-item"><a href="#">Recently Updated</a></li>
+              <li class="dropdown-item"><%= link_to 'Newly Added', new_classified_index_path, method: :post %></li>
+              <li class="dropdown-item"><%= link_to 'Recently Updated', updated_classified_index_path, method: :post %></li>
           </ul>
       </li>
 
@@ -72,7 +72,7 @@
                         </span>
                     </span>
                     <span class="item-right">
-                        <button class="btn btn-danger">X</button>
+                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Remove Item">X</button>
                     </span>
                 </span>
               </li>
@@ -105,7 +105,7 @@
                 </span>
               </li>
               <li class="dropdown-divider"></li>
-              <li><a class="text-xs-center btn btn-primary" href="#">View Cart</a></li>
+              <li class="text-center"><a class="text-xs-center btn btn-primary" href="#">View Cart</a></li>
           </ul>
         </li>
       </ul>
@@ -128,7 +128,7 @@
         </div>
       <% else %>
         <div class="btn-group dropleft">
-          <button type="button" class="btn btn-info">Login</button>
+          <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Login">Login</button>
           <button type="button" class="btn btn-info nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="sr-only">Toggle Dropdown</span>
           </button>
