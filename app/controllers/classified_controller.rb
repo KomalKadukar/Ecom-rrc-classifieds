@@ -15,9 +15,9 @@ class ClassifiedController < ApplicationController
     # selected_category = "#{params[:category]}".to_s
     selected_category = params[:category].to_s
 
-    if(key.present?)
-      redirect_to root_path
-    end
+    # if (!key.present?)
+    #   redirect_to root_path
+    # end
 
     if selected_category == 'all'
       @classified_results =
@@ -31,23 +31,24 @@ class ClassifiedController < ApplicationController
 
   # Gets classifieds newly added in last 24 hours
   def newly_added
-    current_time = Time.now
+    current_time = Time.current
     @classifieds_added = Classified.where(created_at: (current_time - 24.hours)..current_time)
 
-    if(@classifieds_added.count == 0)
-      flash[:alert] = "There are no new classifieds posted."
+    if @classifieds_added.count.zero?
+      flash[:alert] = 'There are no new classifieds posted.'
       redirect_to root_path
     end
   end
 
   # Gets classifieds updated in last 24 hours
   def recently_updated
-    current_time = Time.now
-    @classifieds_updated = Classified.where(updated_at: (current_time - 24.hours)..current_time)
-                                     .where.not(created_at: (current_time - 24.hours)..current_time)
+    current_time = Time.current
+    @classifieds_updated =
+      Classified.where(updated_at: (current_time - 24.hours)..current_time)
+                .where.not(created_at: (current_time - 24.hours)..current_time)
 
-    if(@classifieds_updated.count == 0)
-      flash[:alert] = "There are no recently updated classifieds posted."
+    if @classifieds_updated.count.zero?
+      flash[:alert] = 'There are no recently updated classifieds posted.'
       redirect_to root_path
     end
   end
