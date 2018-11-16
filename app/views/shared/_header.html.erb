@@ -33,6 +33,7 @@
           <a class="nav-link dropdown-toggle" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop By</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown2">
               <li><%= link_to 'Categories', categories_path, class: "dropdown-item" %></li>
+              <li class="dropdown-divider"></li>
               <li class="dropdown-item"><a href="#">Newly Added</a></li>
               <li class="dropdown-item"><a href="#">Recently Updated</a></li>
           </ul>
@@ -53,8 +54,78 @@
 
     </ul>
 
+    <div>
+		<ul class="nav navbar-nav navbar-right mr-sm-2">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle btn bg-light text-dark" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-shopping-cart"></span> 4 - Items in Cart
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-cart" role="menu">
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img src="http://www.prepbootstrap.com/Content/images/template/menucartdropdown/item_1.jpg" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>price: 27$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-danger">X</button>
+                    </span>
+                </span>
+              </li>
+              <li>
+                  <span class="item">
+                    <span class="item-left">
+                        <img src="http://www.prepbootstrap.com/Content/images/template/menucartdropdown/item_2.jpg" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>price: 3$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-danger  fa fa-close">X</button>
+                    </span>
+                </span>
+              </li>
+              <li>
+                <span class="item">
+                    <span class="item-left">
+                        <img src="http://www.prepbootstrap.com/Content/images/template/menucartdropdown/item_4.jpg" alt="" />
+                        <span class="item-info">
+                            <span>Item name</span>
+                            <span>price: 7$</span>
+                        </span>
+                    </span>
+                    <span class="item-right">
+                        <button class="btn btn-danger  fa fa-close">X</button>
+                    </span>
+                </span>
+              </li>
+              <li class="dropdown-divider"></li>
+              <li><a class="text-xs-center btn btn-primary" href="#">View Cart</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
     <% if student_signed_in? %>
-        <%= link_to('Logout', destroy_student_session_path, method: :delete, class: "btn btn-info") %>
+        <div class="btn-group dropleft">
+          <button type="button" class="btn btn-info"><%= current_student.name %></button>
+          <button type="button" class="btn btn-info nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item text-center font-weight-bold" href="#"> Add new Classified </a>
+              <%= link_to('View Your Classifieds', student_path(id: current_student.id), class: "dropdown-item text-center font-weight-bold") %>
+            <div class="dropdown-divider"></div>
+              <div class="bottom text-center">
+                <%= link_to('Logout', destroy_student_session_path, method: :delete, class: "dropdown-item font-weight-bold text-info") %>
+              </div>
+          </div>
+        </div>
       <% else %>
         <div class="btn-group dropleft">
           <button type="button" class="btn btn-info">Login</button>
