@@ -7,5 +7,10 @@ class StudentController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
+
+    if(@student.classifieds.count == 0)
+      flash[:alert] = "You have no classifieds posted."
+      redirect_to root_path
+    end
   end
 end
