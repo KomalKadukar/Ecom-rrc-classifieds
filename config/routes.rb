@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :classified, only: [:index, :show] do
     collection do
       get 'results'
+      post 'newly_added', as: 'new'
+      post 'recently_updated', as: 'updated'
     end
   end
 
