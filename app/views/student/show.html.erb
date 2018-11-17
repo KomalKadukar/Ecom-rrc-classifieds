@@ -39,13 +39,12 @@
           <div class="action-wrap">
             <div class="price-wrap h4">
               <span class="price"> <%= number_to_currency(classified.price) %>  </span>
-              <%# <del class="price-old"> $98</del> %>
             </div> <!-- info-price-detail // -->
-            <%# <p class="text-success">Free shipping</p> %>
             <br>
             <p>
-              <a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
-              <%= link_to "Details", classified, class:"btn btn-secondary" %>
+              <% if classified.sold %>
+                <a href="#" class="btn  btn-danger"> <i class="fas fa-shopping-cart"></i> Sold </a>
+              <% end %>
             </p>
             <%# <a href="#"><i class="fa fa-heart"></i> Add to wishlist</a> %>
           </div> <!-- action-wrap.// -->

@@ -3,7 +3,7 @@
     <h3>Category - <span class="text-info font-weight-bold"> <%= @category.name %></span></h3>
   </div>
 
-  <% @category.classifieds.each do |classified| %>
+  <% @category.classifieds.where(sold: [nil, false]).each do |classified| %>
     <article class="card card-product">
       <div class="card-body">
       <div class="row">

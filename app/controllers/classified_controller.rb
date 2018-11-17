@@ -2,7 +2,8 @@
 
 class ClassifiedController < ApplicationController
   def index
-    @classifieds = Classified.order(created_at: :desc).page(params[:page]).per(4)
+    @classifieds = Classified.where(sold: [nil, false])
+                             .order(created_at: :desc).page(params[:page]).per(4)
   end
 
   def show
@@ -22,10 +23,12 @@ class ClassifiedController < ApplicationController
     if selected_category == 'all'
       @classified_results =
         Classified.where('item LIKE :search OR description LIKE :search', search: key)
+                  .where(sold: [nil, false])
     else
       @classified_results =
         Classified.joins(:category).where('name = ?', selected_category)
                   .where('item LIKE :search OR description LIKE :search', search: key)
+                  .where(sold: [nil, false])
     end
   end
 
