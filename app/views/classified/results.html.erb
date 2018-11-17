@@ -4,7 +4,7 @@
 
 <div class="container">
   <%= render partial: 'classified', #/views/classified/_classified.html.erb
-          collection: @classified_results %>
+          collection: @classified_results.where(sold: [nil, false]) %>
 
 </div>
 

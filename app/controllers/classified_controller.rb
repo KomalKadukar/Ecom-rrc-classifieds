@@ -13,7 +13,6 @@ class ClassifiedController < ApplicationController
   # Finds classified within selected category
   def results
     key = "%#{params[:query]}%"
-    # selected_category = "#{params[:category]}".to_s
     selected_category = params[:category].to_s
 
     # if (key.empty?)
@@ -23,12 +22,10 @@ class ClassifiedController < ApplicationController
     if selected_category == 'all'
       @classified_results =
         Classified.where('item LIKE :search OR description LIKE :search', search: key)
-                  .where(sold: [nil, false])
     else
       @classified_results =
         Classified.joins(:category).where('name = ?', selected_category)
                   .where('item LIKE :search OR description LIKE :search', search: key)
-                  .where(sold: [nil, false])
     end
   end
 
