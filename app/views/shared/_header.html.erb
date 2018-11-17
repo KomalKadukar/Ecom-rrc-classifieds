@@ -174,14 +174,10 @@
                               <tr>
                                   <td></td>
                                   <td></td>
-                                  <td class="text-right">Sub-Total</td>
-                                  <td class="text-right">255,90 €</td>
-                              </tr>
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td class="text-right"><strong>Total</strong></td>
-                                  <td class="text-right"><strong>346,90 €</strong></td>
+                                  <td class="text-right"><strong>Sub-Total</strong></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@cart_classifieds.collect { |item| item.valid? ? item.price : 0 }.sum) %>
+                                  </strong></td>
                               </tr>
                           </tbody>
                       </table>
