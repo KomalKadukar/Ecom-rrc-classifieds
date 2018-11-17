@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_195442) do
+ActiveRecord::Schema.define(version: 2018_11_17_161324) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_195442) do
     t.integer "classified_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "item_price"
     t.index ["classified_id"], name: "index_order_classifieds_on_classified_id"
     t.index ["order_id"], name: "index_order_classifieds_on_order_id"
   end
