@@ -13,10 +13,15 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :classified, only: [:index, :show] do
+    member do
+      post :add_to_cart, as: 'add_to_cart'
+      post :remove_from_cart, as: 'remove_from_cart'
+    end
     collection do
       get 'results'
       post 'newly_added', as: 'new'
       post 'recently_updated', as: 'updated'
+      post 'clear_the_cart', as: 'clear_cart'
     end
   end
 

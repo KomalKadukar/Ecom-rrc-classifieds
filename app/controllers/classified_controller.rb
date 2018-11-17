@@ -15,8 +15,8 @@ class ClassifiedController < ApplicationController
     # selected_category = "#{params[:category]}".to_s
     selected_category = params[:category].to_s
 
-    # if (!key.present?)
-    #   redirect_to root_path
+    # if (key.empty?)
+    # redirect_to root_path
     # end
 
     if selected_category == 'all'
@@ -34,10 +34,10 @@ class ClassifiedController < ApplicationController
     current_time = Time.current
     @classifieds_added = Classified.where(created_at: (current_time - 24.hours)..current_time)
 
-    if @classifieds_added.count.zero?
+    @classifieds_added.count.zero? &&
       flash[:alert] = 'There are no new classifieds posted.'
-      redirect_to root_path
-    end
+
+    redirect_to root_path
   end
 
   # Gets classifieds updated in last 24 hours
@@ -47,9 +47,40 @@ class ClassifiedController < ApplicationController
       Classified.where(updated_at: (current_time - 24.hours)..current_time)
                 .where.not(created_at: (current_time - 24.hours)..current_time)
 
-    if @classifieds_updated.count.zero?
+    # if @classifieds_updated.count.zero?
+    #   flash[:alert] = 'There are no recently updated classifieds posted.'
+    #   redirect_to root_path
+    # end
+
+    @classifieds_updated.count.zero? &&
       flash[:alert] = 'There are no recently updated classifieds posted.'
-      redirect_to root_path
-    end
+
+    redirect_to root_path
+  end
+
+  def add_to_cart
+    id = params[:id].to_i
+    # unless session[:cart_items].include?(id)
+    # session[:cart_items] << id unless session[:cart_items].include?(id)
+    # end
+    !session[:cart_items].include?(id) && session[:cart_items] << id
+    redirect_to root_path
+  end
+
+  def remove_from_cart
+    id = params[:id].to_i
+
+    session[:cart_items].include?(id) && session[:cart_items].delete(id)
+    # if session[:cart_items].include?(id)
+    #   session[:cart_items].delete(id)
+    # end
+
+    redirect_to root_path
+  end
+
+  def clear_the_cart
+    session[:cart_items] = []
+
+    redirect_to root_path
   end
 end

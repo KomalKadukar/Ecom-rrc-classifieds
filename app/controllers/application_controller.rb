@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :initialize_session
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :current_cart_classifieds
 
   protected
 
@@ -18,6 +20,15 @@ class ApplicationController < ActionController::Base
 
   def categories
     @categories = Category.all
+  end
+
+  def initialize_session
+    session[:cart] ||= 0
+    session[:cart_items] ||= []
+  end
+
+  def current_cart_classifieds
+    @cart_classifieds = Classified.find(session[:cart_items])
   end
 
   helper_method :programs
