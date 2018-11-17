@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-   devise_for :students
+  devise_for :students
 
   # get 'student/index'
   # get 'student/show'
@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   # get 'program/show'
   # get 'category/index'
   # get 'category/show'
+  # get 'cart/show'
+  # get 'order_classified/create'
+  # get 'order_classified/update'
+  # get 'order_classified/destroy'
+  # get 'carts/show'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -29,6 +34,8 @@ Rails.application.routes.draw do
   resources :program, only: [:index, :show], as: 'programs'
   resources :student, only: [:index, :show], as: 'students'
   resources :pages, only: [:show]
+  resources :cart, only: [:show]
+  resources :order_classified, only: [:create, :update, :destroy]
 
   get ':permalink', to: 'pages#permalink', as: 'permalink'
 
