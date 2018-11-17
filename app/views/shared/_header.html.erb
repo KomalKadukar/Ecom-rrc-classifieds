@@ -58,54 +58,41 @@
 		<ul class="nav navbar-nav navbar-right mr-sm-2">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle btn bg-light text-dark" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span class="glyphicon glyphicon-shopping-cart"></span> 4 - Items in Cart
+            <span class="glyphicon glyphicon-shopping-cart"></span><%= session[:cart_items].count %> - Items in Cart
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu dropdown-cart" role="menu">
-              <li>
+              <% @cart_classifieds.each do |classified| %>
+                <li>
                   <span class="item">
-                    <span class="item-left">
-                        <img src="http://www.prepbootstrap.com/Content/images/template/menucartdropdown/item_1.jpg" alt="" />
-                        <span class="item-info">
-                            <span>Item name</span>
-                            <span>price: 27$</span>
-                        </span>
+                      <span class="item-left">
+                          <% if classified.image.attached? %>
+                            <div class="col-xs-6 col-md-3">
+                              <%= image_tag classified.image.variant(resize: "50x50"), alt: "Image Not Available" %>
+                            </div>
+                          <% else %>
+                            <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+                          <% end %>
+                          <span class="item-info">
+                              <span class="text-small"><%= classified.item %></span>
+                              <span>price: <%= number_to_currency(classified.price) %></span>
+                          </span>
+                      </span>
+                      <span class="item-right">
+                        <%= link_to 'X', remove_from_cart_classified_path(classified.id), method: :post,  class: "btn btn-danger btn-sm" %>
+                      </span>
                     </span>
-                    <span class="item-right">
-                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Remove Item">X</button>
-                    </span>
-                </span>
-              </li>
-              <li>
-                  <span class="item">
-                    <span class="item-left">
-                        <img src="http://www.prepbootstrap.com/Content/images/template/menucartdropdown/item_2.jpg" alt="" />
-                        <span class="item-info">
-                            <span>Item name</span>
-                            <span>price: 3$</span>
-                        </span>
-                    </span>
-                    <span class="item-right">
-                        <button class="btn btn-danger  fa fa-close">X</button>
-                    </span>
-                </span>
-              </li>
-              <li>
-                <span class="item">
-                    <span class="item-left">
-                        <img src="http://www.prepbootstrap.com/Content/images/template/menucartdropdown/item_4.jpg" alt="" />
-                        <span class="item-info">
-                            <span>Item name</span>
-                            <span>price: 7$</span>
-                        </span>
-                    </span>
-                    <span class="item-right">
-                        <button class="btn btn-danger  fa fa-close">X</button>
-                    </span>
-                </span>
-              </li>
+                </li>
+              <% end %>
               <li class="dropdown-divider"></li>
-              <li class="text-center"><a class="text-xs-center btn btn-primary" href="#">View Cart</a></li>
+              <% if session[:cart_items].count.zero? %>
+                <li><p class="alert alert-danger alert-dismissible text-center" role="alert" >Your cart is empty. </p></li>
+              <% else %>
+                <li class="text-center mb-2"><a class="text-xs-center btn btn-primary btn-block btn-sm text-uppercase"  data-toggle="modal" data-target="#cartModal" href="#">View Cart</a></li>
+                <li class="text-center mb-2"><%= link_to 'Clear The Cart', clear_cart_classified_index_path, method: :post, class: "text-xs-center btn btn-light btn-block btn-sm text-uppercase" %></li>
+                <li class="dropdown-divider"></li>
+                <li class="text-center mb-2"><a class="text-xs-center btn btn-success btn-block btn-sm text-uppercase" href="#">Checkout</a></li>
+              <% end %>
           </ul>
         </li>
       </ul>
@@ -141,7 +128,72 @@
           </div>
         </div>
       <% end %>
-
-
   </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container mb-4">
+          <div class="row">
+              <div class="col-12">
+                  <div class="table-responsive">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th scope="col"> </th>
+                                  <th scope="col">Product</th>
+                                  <th scope="col" class="text-right">Price</th>
+                                  <th> </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <% @cart_classifieds.each do |classified| %>
+                              <tr>
+                                  <td>
+                                    <% if classified.image.attached? %>
+                                      <%= image_tag classified.image.variant(resize: "50x50"), alt: classified.item %>
+                                    <% else %>
+                                      <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+                                    <% end %>
+                                  <td><%= classified.item %></td>
+                                  <td class="text-right"><%= number_to_currency(classified.price) %></td>
+                                  <td class="text-right">
+                                    <%= link_to 'X', remove_from_cart_classified_path(classified.id), method: :post,  class: "btn btn-danger btn-sm" %>
+                                  </td>
+                              </tr>
+                            <% end %>
+                              <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td class="text-right">Sub-Total</td>
+                                  <td class="text-right">255,90 €</td>
+                              </tr>
+                              <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td class="text-right"><strong>Total</strong></td>
+                                  <td class="text-right"><strong>346,90 €</strong></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to('Continue Shopping', root_path, class: "btn btn-light")  %>
+        <button type="button" class="btn btn-success text-uppercase">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
