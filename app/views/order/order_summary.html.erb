@@ -1,0 +1,65 @@
+<div class="card mt-5">
+  <div class="card-header">
+    Order Summary for <span class="font-weight-bold"> <%= current_student.name %> </span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Shipping Address:</h5>
+    <p class="card-text"><%= current_student.address %><br>
+      <%= current_student.city %><br>
+      <%= current_student.province.name %>
+    </p>
+    <hr/>
+    <h5 class="card-title">Email Address:</h5>
+    <p class="card-text"><%= current_student.email %></p>
+    <hr/>
+
+    <h5 class="card-title">Order Details:</h5>
+    <div class="container mb-4">
+          <div class="row">
+              <div class="col-12">
+                  <div class="table-responsive">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th scope="col"> </th>
+                                  <th scope="col">Product</th>
+                                  <th scope="col" class="text-right">Price</th>
+                                  <th> </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <% @cart_classifieds.each do |classified| %>
+                              <tr>
+                                  <td>
+                                    <% if classified.image.attached? %>
+                                      <%= image_tag classified.image.variant(resize: "50x50"), alt: classified.item %>
+                                    <% else %>
+                                      <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+                                    <% end %>
+                                  <td><%= classified.item %></td>
+                                  <td class="text-right"><%= number_to_currency(classified.price) %></td>
+                                  <td class="text-right">
+                                    <%= link_to 'X', remove_from_cart_classified_path(classified.id), method: :post,  class: "btn btn-danger btn-sm" %>
+                                  </td>
+                              </tr>
+                            <% end %>
+                              <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td class="text-right"><strong>Sub-Total</strong></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@cart_classifieds.collect { |item| item.valid? ? item.price : 0 }.sum) %>
+                                  </strong></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+    <hr/>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>

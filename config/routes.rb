@@ -34,10 +34,12 @@ Rails.application.routes.draw do
   resources :program, only: [:index, :show], as: 'programs'
   resources :student, only: [:index, :show], as: 'students'
   resources :pages, only: [:show]
-  resources :cart, only: [:show]
-  resources :order_classified, only: [:create, :update, :destroy]
+  # resources :cart, only: [:show]
+  # resources :order_classifieds, only: [:create, :update, :destroy]
 
   get ':permalink', to: 'pages#permalink', as: 'permalink'
+  get 'order/order_summary', as: 'summary'
+  # get ':create_order', to: 'order#checkout', as: 'checkout'
 
   root to: 'classified#index'
 end
