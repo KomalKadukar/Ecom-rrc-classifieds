@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ClassifiedController < ApplicationController
+  before_action :authenticate_student!, except: [:show, :index, :results,
+                                                 :newly_added, :recently_updated]
+
   def index
     @classifieds = Classified.where(sold: [nil, false])
                              .order(created_at: :desc).page(params[:page]).per(4)
@@ -74,13 +77,11 @@ class ClassifiedController < ApplicationController
     # if session[:cart_items].include?(id)
     #   session[:cart_items].delete(id)
     # end
-
     redirect_to root_path
   end
 
   def clear_the_cart
     session[:cart_items] = []
-
     redirect_to root_path
   end
 end
