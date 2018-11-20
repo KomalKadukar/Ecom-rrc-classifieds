@@ -44,7 +44,7 @@
             <%# <p class="text-success">Free shipping</p> %>
             <br>
             <p>
-              <a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+              <%= link_to 'Add to cart', add_to_cart_classified_path(classified), method: :post,  class: "btn  btn-outline-primary" %>
               <%= link_to "Details", classified, class:"btn btn-secondary" %>
             </p>
             <%# <a href="#"><i class="fa fa-heart"></i> Add to wishlist</a> %>

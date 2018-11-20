@@ -33,7 +33,7 @@
           <p class="btn  btn-outline-primary"><%= link_to program.name, program  %></p>
         <% end %>
         <hr>
-        <a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+        <%= link_to 'Add to cart', add_to_cart_classified_path(@classified), method: :post,  class: "btn  btn-outline-primary" %>
       </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
 	</div> <!-- row.// -->
