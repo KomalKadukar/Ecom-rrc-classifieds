@@ -1,4 +1,4 @@
-<div class="card mt-5">
+<div class="card mt-5 mb-5">
   <div class="card-header">
     Order Summary for <span class="font-weight-bold"> <%= current_student.name %> </span>
   </div>
@@ -23,8 +23,8 @@
                               <tr>
                                   <th scope="col"> </th>
                                   <th scope="col">Product</th>
+                                  <th></th>
                                   <th scope="col" class="text-right">Price</th>
-                                  <th> </th>
                               </tr>
                           </thead>
                           <tbody>
@@ -37,18 +37,34 @@
                                       <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
                                     <% end %>
                                   <td><%= classified.item %></td>
+                                  <td></td>
                                   <td class="text-right"><%= number_to_currency(classified.price) %></td>
-                                  <td class="text-right">
-                                    <%= link_to 'X', remove_from_cart_classified_path(classified.id), method: :post,  class: "btn btn-danger btn-sm" %>
-                                  </td>
                               </tr>
                             <% end %>
                               <tr>
                                   <td></td>
-                                  <td></td>
                                   <td class="text-right"><strong>Sub-Total</strong></td>
+                                  <td></td>
                                   <td class="text-right"><strong>
-                                    <%= number_to_currency(@cart_classifieds.collect { |item| item.valid? ? item.price : 0 }.sum) %>
+                                    <%= number_to_currency(@sub_total) %>
+                                  </strong></td>
+                              </tr>
+                              <% @rates.each do |rate, value| %>
+                              <tr>
+                                  <td class="text-right"></td>
+                                  <td class="text-right"></td>
+                                  <td class="text-right"><span><%= rate %> </span></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@sub_total * value) %>
+                                  </strong></td>
+                              </tr>
+                              <% end %>
+                              <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td class="text-right"><strong>Total</strong></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@grand_total) %>
                                   </strong></td>
                               </tr>
                           </tbody>
@@ -58,8 +74,10 @@
             </div>
         </div>
 
-
     <hr/>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="text-center">
+      <a href="#" class="btn btn-primary btn-lg">Proceed to Payment</a>
+    </div>
+
   </div>
 </div>

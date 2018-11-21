@@ -89,9 +89,13 @@
                 <li><p class="alert alert-danger alert-dismissible text-center" role="alert" >Your cart is empty. </p></li>
               <% else %>
                 <li class="text-center mb-2"><a class="text-xs-center btn btn-primary btn-block btn-sm text-uppercase"  data-toggle="modal" data-target="#cartModal" href="#">View Cart</a></li>
-                <li class="text-center mb-2"><%= link_to 'Clear The Cart', clear_cart_classified_index_path, method: :post, class: "text-xs-center btn btn-light btn-block btn-sm text-uppercase" %></li>
+                <li class="text-center mb-2">
+                  <%= link_to 'Clear The Cart', clear_cart_classified_index_path, method: :post, class: "text-xs-center btn btn-light btn-block btn-sm text-uppercase" %>
+                </li>
                 <li class="dropdown-divider"></li>
-                <li class="text-center mb-2"><a class="text-xs-center btn btn-success btn-block btn-sm text-uppercase" href="#">Checkout</a></li>
+                <li class="text-center mb-2">
+                  <%= link_to 'Checkout', summary_path, class: "text-xs-center btn btn-success btn-block btn-sm text-uppercase" %>
+                </li>
               <% end %>
           </ul>
         </li>
@@ -182,13 +186,13 @@
                           </tbody>
                       </table>
                   </div>
-              </div>
-          </div>
-      </div>
+                </div>
+            </div>
+        </div>
       </div>
       <div class="modal-footer">
         <%= link_to('Continue Shopping', root_path, class: "btn btn-light")  %>
-        <button type="button" class="btn btn-success text-uppercase">Checkout</button>
+        <%= link_to 'Checkout', summary_path, class: "btn btn-success text-uppercase" %>
       </div>
     </div>
   </div>
