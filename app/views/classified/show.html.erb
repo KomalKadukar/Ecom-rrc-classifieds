@@ -1,3 +1,13 @@
+<div class="container">
+  <nav aria-label="breadcrumb mt-5">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+      <li class="breadcrumb-item"><%= link_to 'Categories', categories_path %></li>
+      <li class="breadcrumb-item"><%= link_to @classified.category.name,  @classified.category %></li>
+      <li class="breadcrumb-item"><%= link_to @classified.item,  @classified %></li>
+    </ol>
+  </nav>
+</div>
 
 <div class="card mt-5">
 	<div class="row no-gutters">

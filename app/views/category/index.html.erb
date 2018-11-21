@@ -1,6 +1,14 @@
 <div class="shadow-lg p-3 mb-5 bg-light rounded">
-  <h3 class="text-info font-weight-bold">Item categories</h3>
+  <h3 class="text-info font-weight-bold">Categories</h3>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+      <li class="breadcrumb-item"><%= link_to 'Categories', categories_path %></li>
+    </ol>
+  </nav>
 </div>
+
 
 <div class="container">
   <div class="list-group">

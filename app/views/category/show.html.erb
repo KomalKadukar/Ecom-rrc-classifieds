@@ -1,6 +1,14 @@
 <div class="container">
   <div class="shadow-lg p-3 mb-5 bg-light rounded">
     <h3>Category - <span class="text-info font-weight-bold"> <%= @category.name %></span></h3>
+
+    <nav aria-label="breadcrumb mt-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+        <li class="breadcrumb-item"><%= link_to 'Categories', categories_path %></li>
+        <li class="breadcrumb-item"><%= link_to @category.name, @category %></li>
+      </ol>
+    </nav>
   </div>
 
   <% @category.classifieds.where(sold: [nil, false]).each do |classified| %>
