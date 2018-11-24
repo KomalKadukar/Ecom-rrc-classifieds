@@ -43,7 +43,11 @@
           <p class="btn  btn-outline-primary"><%= link_to program.name, program  %></p>
         <% end %>
         <hr>
-        <%= link_to 'Add to cart', add_to_cart_classified_path(@classified), method: :post,  class: "btn  btn-outline-primary" %>
+        <% if session[:cart_items].include?(@classified.id) %>
+          <button type="button" class="btn btn-success">Added to Cart</button>
+        <% else %>
+          <%= link_to 'Add to Cart', add_to_cart_classified_path(@classified), method: :post,  class: "btn  btn-outline-primary" %>
+        <% end %>
       </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
 	</div> <!-- row.// -->

@@ -45,7 +45,11 @@
           <%# <p class="text-success">Free shipping</p> %>
           <br>
           <p>
-            <%= link_to 'Add to cart', add_to_cart_classified_path(classified), method: :post,  class: "btn  btn-outline-primary" %>
+            <% if session[:cart_items].include?(classified.id) %>
+              <button type="button" class="btn btn-success">Added to Cart</button>
+            <% else %>
+              <%= link_to 'Add to Cart', add_to_cart_classified_path(classified), method: :post,  class: "btn  btn-outline-primary" %>
+            <% end %>
             <%= link_to "Details", classified, class:"btn btn-secondary" %>
           </p>
           <%# <a href="#"><i class="fa fa-heart"></i> Add to wishlist</a> %>
