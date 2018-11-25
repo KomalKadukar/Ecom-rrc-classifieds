@@ -1,0 +1,93 @@
+<div class="card mt-5 mb-5">
+  <div class="card-header">
+    Order Summary for <span class="font-weight-bold"> <%= current_student.name %> </span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Shipping Address:</h5>
+    <p class="card-text"><%= current_student.address %><br>
+      <%= current_student.city %><br>
+      <%= current_student.province.name %>
+    </p>
+    <hr/>
+    <h5 class="card-title">Email Address:</h5>
+    <p class="card-text"><%= current_student.email %></p>
+    <hr/>
+
+    <%= form_tag order_index_path do %>
+      <h5 class="card-title">Order Details:</h5>
+      <div class="container mb-4">
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:error] %></p>
+            </div>
+          <% end %>
+          <div class="row">
+              <div class="col-12">
+                  <div class="table-responsive">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th scope="col"> </th>
+                                  <th scope="col">Product</th>
+                                  <th></th>
+                                  <th scope="col" class="text-right">Price</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <% @cart_classifieds.each do |classified| %>
+                              <tr>
+                                  <td>
+                                    <% if classified.image.attached? %>
+                                      <%= image_tag classified.image.variant(resize: "50x50"), alt: classified.item %>
+                                    <% else %>
+                                      <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+                                    <% end %>
+                                  <td><%= classified.item %></td>
+                                  <td></td>
+                                  <td class="text-right"><%= number_to_currency(classified.price) %></td>
+                              </tr>
+                            <% end %>
+                              <tr>
+                                  <td></td>
+                                  <td class="text-right"><strong>Sub-Total</strong></td>
+                                  <td></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@sub_total) %>
+                                  </strong></td>
+                              </tr>
+                              <% @rates.each do |rate, value| %>
+                              <tr>
+                                  <td class="text-right"></td>
+                                  <td class="text-right"></td>
+                                  <td class="text-right"><span><%= rate %> </span></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@sub_total * value) %>
+                                  </strong></td>
+                              </tr>
+                              <% end %>
+                              <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td class="text-right"><strong>Total</strong></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@grand_total) %>
+                                  </strong></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+      </div>
+
+      <hr/>
+      <div class="text-center">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Classified Items Total"
+          data-amount="<%= (@grand_total * 100) %>"
+          data-locale="auto"></script>
+      </div>
+    <% end %>
+  </div>
+</div>
