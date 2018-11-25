@@ -94,7 +94,7 @@
                 </li>
                 <li class="dropdown-divider"></li>
                 <li class="text-center mb-2">
-                  <%= link_to 'Checkout', summary_path, class: "text-xs-center btn btn-success btn-block btn-sm text-uppercase" %>
+                  <%= link_to 'Checkout', new_order_path, class: "text-xs-center btn btn-success btn-block btn-sm text-uppercase" %>
                 </li>
               <% end %>
           </ul>
@@ -192,7 +192,7 @@
       </div>
       <div class="modal-footer">
         <%= link_to('Continue Shopping', root_path, class: "btn btn-light")  %>
-        <%= link_to 'Checkout', summary_path, class: "btn btn-success text-uppercase" %>
+        <%= link_to 'Checkout', new_order_path, class: "btn btn-success text-uppercase" %>
       </div>
     </div>
   </div>
