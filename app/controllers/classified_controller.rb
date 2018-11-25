@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ClassifiedController < ApplicationController
-  before_action :authenticate_student!, except: [:show, :index, :results,
-                                                 :newly_added, :recently_updated]
+  # before_action :authenticate_student!, except: [:show, :index, :results,
+  #                                                :newly_added, :recently_updated]
 
   def index
     @classifieds = Classified.where(sold: [nil, false])
