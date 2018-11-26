@@ -40,7 +40,7 @@ class ClassifiedController < ApplicationController
     @classifieds_added.count.zero? &&
       flash[:alert] = 'There are no new classifieds posted.'
 
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   # Gets classifieds updated in last 24 hours
@@ -49,6 +49,7 @@ class ClassifiedController < ApplicationController
     @classifieds_updated =
       Classified.where(updated_at: (current_time - 24.hours)..current_time)
                 .where.not(created_at: (current_time - 24.hours)..current_time)
+                .where(sold: [nil, false])
 
     # if @classifieds_updated.count.zero?
     #   flash[:alert] = 'There are no recently updated classifieds posted.'
@@ -58,7 +59,7 @@ class ClassifiedController < ApplicationController
     @classifieds_updated.count.zero? &&
       flash[:alert] = 'There are no recently updated classifieds posted.'
 
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   def add_to_cart
