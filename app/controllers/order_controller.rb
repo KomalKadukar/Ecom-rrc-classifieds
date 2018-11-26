@@ -30,7 +30,6 @@ class OrderController < ApplicationController
       create_order
       session[:cart_items] = []
     end
-
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_order_path
@@ -40,8 +39,7 @@ class OrderController < ApplicationController
 
   def create_order
     @current_order = Order.create(
-      order_amount: @sub_total,
-      student: current_student,
+      order_amount: @sub_total, student: current_student,
       province_rate: current_student.province.province_rate,
       canada_rate: current_student.province.canada_rate,
       status: Status.find_by(name: 'Paid')
@@ -50,7 +48,6 @@ class OrderController < ApplicationController
     @cart_classifieds.each do |classified|
       OrderClassified.create(order: @current_order, classified: classified,
                              item_price: classified.price)
-
       classified.update(sold: true)
     end
   end
