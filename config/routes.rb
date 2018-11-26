@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # get 'order_classified/update'
   # get 'order_classified/destroy'
   # get 'carts/show'
+  # get 'order_history/index'
+  # get 'order_history/show'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -35,6 +37,7 @@ Rails.application.routes.draw do
   resources :student, only: [:index, :show], as: 'students'
   resources :pages, only: [:show]
   resources :order, only: [:new, :create]
+  resources :order_history, only: [:index, :show], as: 'order_history'
 
   get ':permalink', to: 'pages#permalink', as: 'permalink'
   # get 'order/order_summary', as: 'summary'

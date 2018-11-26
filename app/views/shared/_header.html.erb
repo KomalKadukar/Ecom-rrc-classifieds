@@ -110,7 +110,8 @@
           </button>
           <div class="dropdown-menu">
             <a class="dropdown-item text-center font-weight-bold" href="#"> Add new Classified </a>
-              <%= link_to('View Your Classifieds', student_path(id: current_student.id), class: "dropdown-item text-center font-weight-bold") %>
+            <%= link_to('View Your Classifieds', student_path(id: current_student.id), class: "dropdown-item text-center font-weight-bold") %>
+            <%= link_to('View Order History', order_history_index_path, class: "dropdown-item text-center font-weight-bold") %>
             <div class="dropdown-divider"></div>
               <div class="bottom text-center">
                 <%= link_to('Logout', destroy_student_session_path, method: :delete, class: "dropdown-item font-weight-bold text-info") %>
