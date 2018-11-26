@@ -1,0 +1,96 @@
+<nav aria-label="breadcrumb mt-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+        <li class="breadcrumb-item"><%= link_to 'Orders History', order_history_index_path %></li>
+        <li class="breadcrumb-item"><%= link_to @order.id, order_history_path(id: @order.id) %></li>
+      </ol>
+    </nav>
+
+<div class="card mt-5 mb-5">
+  <div class="card-header">
+    Order Summary for <span class="font-weight-bold"> Order ID:  <%= @order.id %> </span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Shipping Address:</h5>
+    <p class="card-text"><%= @order.student.address %><br>
+      <%= @order.student.city %><br>
+      <%= @order.student.province.name %>
+    </p>
+    <hr/>
+    <h5 class="card-title">Email Address:</h5>
+    <p class="card-text"><%= @order.student.email %></p>
+    <hr/>
+
+
+      <h5 class="card-title">Order Details:</h5>
+      <div class="container mb-4">
+          <div class="row">
+              <div class="col-12">
+                  <div class="table-responsive">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th scope="col"> </th>
+                                  <th scope="col">Product</th>
+                                  <th></th>
+                                  <th scope="col" class="text-right">Price</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <% @order.order_classifieds.each do |classified| %>
+                              <tr>
+                                  <td>
+                                    <% if classified.classified.image.attached? %>
+                                      <%= image_tag classified.classified.image.variant(resize: "50x50"), alt: classified.classified.item %>
+                                    <% else %>
+                                      <p class="alert alert-warning alert-dismissible text-center" role="alert" >Image Not Available </p>
+                                    <% end %>
+                                  <td><%= classified.classified.item %></td>
+                                  <td></td>
+                                  <td class="text-right"><%= number_to_currency(classified.item_price) %></td>
+                              </tr>
+                            <% end %>
+                              <tr>
+                                  <td></td>
+                                  <td class="text-right"><strong>Sub-Total</strong></td>
+                                  <td></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@order.order_amount) %>
+                                  </strong></td>
+                              </tr>
+                              <% if @order.province_rate != 0 %>
+                              <tr>
+                                  <td></td>
+                                  <td class="text-right">Province Rate</td>
+                                  <td></td>
+                                  <td class="text-right">
+                                    <%= number_to_currency(@order.order_amount * @order.province_rate) %>
+                                  </td>
+                              </tr>
+                              <% end %>
+                              <tr>
+                                  <td></td>
+                                  <td class="text-right">GST</td>
+                                  <td></td>
+                                  <td class="text-right">
+                                    <%= number_to_currency(@order.order_amount * @order.canada_rate) %>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td></td>
+                                  <td class="text-right"><strong>Total</strong></td>
+                                  <td></td>
+                                  <td class="text-right"><strong>
+                                    <%= number_to_currency(@order.order_amount + (@order.order_amount * @order.province_rate) + (@order.order_amount * @order.canada_rate)) %>
+                                  </strong></td>
+                              </tr>
+
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+      </div>
+      <hr/>
+  </div>
+</div>
