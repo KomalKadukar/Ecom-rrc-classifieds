@@ -10,8 +10,8 @@ class StudentController < ApplicationController
   def show
     @student = Student.find(params[:id])
 
-    # @student.classifieds.count.zero? &&
-    #   flash[:alert] = 'You have no classifieds posted.'
+    @student.classifieds.count.zero? &&
+      flash[:alert] = 'You have no classifieds listed.'
 
     # redirect_to root_path
   end
