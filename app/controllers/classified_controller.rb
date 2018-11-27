@@ -25,10 +25,12 @@ class ClassifiedController < ApplicationController
     if selected_category == 'all'
       @classified_results =
         Classified.where('item LIKE :search OR description LIKE :search', search: key)
+                  .where(sold: [nil, false])
     else
       @classified_results =
         Classified.joins(:category).where('name = ?', selected_category)
                   .where('item LIKE :search OR description LIKE :search', search: key)
+                  .where(sold: [nil, false])
     end
   end
 
@@ -36,6 +38,7 @@ class ClassifiedController < ApplicationController
   def newly_added
     current_time = Time.current
     @classifieds_added = Classified.where(created_at: (current_time - 24.hours)..current_time)
+                                   .where(sold: [nil, false])
 
     @classifieds_added.count.zero? &&
       flash[:alert] = 'There are no new classifieds posted.'
