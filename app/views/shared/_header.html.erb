@@ -64,8 +64,8 @@
           <ul class="dropdown-menu dropdown-cart" role="menu">
               <% @cart_classifieds.each do |classified| %>
                 <li>
-                  <span class="item">
-                      <span class="item-left">
+                  <div class="item">
+                      <div class="item-left">
                           <% if classified.image.attached? %>
                             <div class="col-xs-6 col-md-3">
                               <%= image_tag classified.image.variant(resize: "50x50"), alt: "Image Not Available" %>
@@ -77,11 +77,11 @@
                               <span class="text-small"><%= classified.item %></span>
                               <span>price: <%= number_to_currency(classified.price) %></span>
                           </span>
-                      </span>
-                      <span class="item-right">
+                      </div>
+                      <div class="item-right">
                         <%= link_to 'X', remove_from_cart_classified_path(classified.id), method: :post,  class: "btn btn-danger btn-sm" %>
-                      </span>
-                    </span>
+                      </div>
+                  </div>
                 </li>
               <% end %>
               <li class="dropdown-divider"></li>
