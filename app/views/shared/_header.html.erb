@@ -14,13 +14,13 @@
           About RRC
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to 'About Us', permalink_path(permalink: 'about'), class: "dropdown-item" %>
-          <%= link_to 'Contact Us', permalink_path(permalink: 'contact'), class: "dropdown-item" %>
+          <%= link_to 'About RRC', permalink_path(permalink: 'about'), class: "dropdown-item" %>
+          <%= link_to 'Contact', permalink_path(permalink: 'contact'), class: "dropdown-item" %>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Programs
+          Listing By Programs
         </a>
        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <% programs.each do |program| %>
@@ -90,7 +90,7 @@
               <% else %>
                 <li class="text-center mb-2"><a class="text-xs-center btn btn-primary btn-block btn-sm text-uppercase"  data-toggle="modal" data-target="#cartModal" href="#">View Cart</a></li>
                 <li class="text-center mb-2">
-                  <%= link_to 'Clear The Cart', clear_cart_classified_index_path, method: :post, class: "text-xs-center btn btn-light btn-block btn-sm text-uppercase" %>
+                  <%= link_to 'Empty Cart', clear_cart_classified_index_path, method: :post, class: "text-xs-center btn btn-light btn-block btn-sm text-uppercase" %>
                 </li>
                 <li class="dropdown-divider"></li>
                 <li class="text-center mb-2">
